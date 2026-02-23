@@ -1,0 +1,40 @@
+{
+  "schema": {
+    "users": {
+      "clerkId": "string",
+      "email": "string",
+      "fullName": "string?",
+      "country": "string?",
+      "interestedProgram": "string?",
+      "avatarUrl": "string?",
+      "role": "string",
+      "createdAt": "number"
+    },
+    "applications": {
+      "userId": "id(users)",
+      "universityName": "string",
+      "programName": "string",
+      "degreeType": "string",
+      "status": "string",
+      "submittedAt": "number?",
+      "updatedAt": "number"
+    },
+    "documents": {
+      "userId": "id(users)",
+      "name": "string",
+      "type": "string",
+      "status": "string",
+      "fileUrl": "string?",
+      "uploadedAt": "number"
+    },
+    "tasks": {
+      "userId": "id(users)",
+      "title": "string",
+      "description": "string?",
+      "dueDate": "number",
+      "completed": "boolean",
+      "priority": "string",
+      "category": "string"
+    }
+  }
+}

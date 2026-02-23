@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "convex-visual": {
+      "command": "npx",
+      "args": ["convex-mcp-visual", "--stdio"],
+      "env": {
+        "CONVEX_DEPLOY_KEY": "dev:impartial-spoonbill-973|eyJ2MiI6IjJlY2IyZWY1ZWVkMzQ0MzE4NTU4YjZmNWVmZThmMjMzIn0="
+      }
+    }
+  }
+}

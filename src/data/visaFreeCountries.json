@@ -1,0 +1,13 @@
+[
+  { "code": "US", "name": "United States", "days": 30, "eligible": true, "flag": "🇺🇸" },
+  { "code": "GB", "name": "United Kingdom", "days": 30, "eligible": true, "flag": "🇬🇧" },
+  { "code": "DE", "name": "Germany", "days": 30, "eligible": true, "flag": "🇩🇪" },
+  { "code": "FR", "name": "France", "days": 30, "eligible": true, "flag": "🇫🇷" },
+  { "code": "AU", "name": "Australia", "days": 30, "eligible": true, "flag": "🇦🇺" },
+  { "code": "CA", "name": "Canada", "days": 30, "eligible": true, "flag": "🇨🇦" },
+  { "code": "JP", "name": "Japan", "days": 30, "eligible": true, "flag": "🇯🇵" },
+  { "code": "MY", "name": "Malaysia", "days": 15, "eligible": true, "flag": "🇲🇾" },
+  { "code": "SG", "name": "Singapore", "days": 30, "eligible": true, "flag": "🇸🇬" },
+  { "code": "IN", "name": "India", "days": 0, "eligible": false, "flag": "🇮🇳" },
+  { "code": "CN", "name": "China", "days": 0, "eligible": false, "flag": "🇨🇳" }
+]
