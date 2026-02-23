@@ -27,31 +27,45 @@ const isDashboardRoute = createRouteMatcher([
 ])
 
 export default clerkMiddleware(async (auth, req) => {
-  const { userId, sessionClaims } = await auth()
-  
-  // Allow public routes
-  if (isPublicRoute(req)) {
+  try {
+    const { userId, sessionClaims } = await auth()
+    
+    // Allow public routes
+    if (isPublicRoute(req)) {
+      return NextResponse.next()
+    }
+
+    // Check if user is authenticated for protected routes
+    if (!userId && (isDashboardRoute(req) || isAdminRoute(req))) {
+      const signInUrl = new URL('/auth', req.url)
+      signInUrl.searchParams.set('redirect_url', req.url)
+      return NextResponse.redirect(signInUrl)
+    }
+
+    // Check admin role for admin routes
+    if (isAdminRoute(req) && userId) {
+      const metadata = (sessionClaims as any)?.metadata
+      const role = metadata?.role as string
+      if (role !== 'admin') {
+        // Redirect non-admin users to dashboard
+        return NextResponse.redirect(new URL('/dashboard', req.url))
+      }
+    }
+
+    return NextResponse.next()
+  } catch (error) {
+    // Log error for debugging
+    console.error('Middleware error:', error)
+    
+    // If it's an auth error, redirect to auth page
+    if (isDashboardRoute(req) || isAdminRoute(req)) {
+      const signInUrl = new URL('/auth', req.url)
+      return NextResponse.redirect(signInUrl)
+    }
+    
+    // For other routes, allow the request to continue
     return NextResponse.next()
   }
-
-  // Check if user is authenticated for protected routes
-  if (!userId && (isDashboardRoute(req) || isAdminRoute(req))) {
-    const signInUrl = new URL('/auth', req.url)
-    signInUrl.searchParams.set('redirect_url', req.url)
-    return NextResponse.redirect(signInUrl)
-  }
-
-  // Check admin role for admin routes
-  if (isAdminRoute(req)) {
-    const metadata = (sessionClaims as any)?.metadata
-    const role = metadata?.role as string
-    if (role !== 'admin') {
-      // Redirect non-admin users to dashboard
-      return NextResponse.redirect(new URL('/dashboard', req.url))
-    }
-  }
-
-  return NextResponse.next()
 })
 
 export const config = {
